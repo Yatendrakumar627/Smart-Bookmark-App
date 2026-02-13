@@ -31,6 +31,7 @@ export default function BookmarksPage() {
 
   useEffect(() => {
     const supabase = createClient();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchBookmarks();
 
     // Set up real-time subscription

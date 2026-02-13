@@ -17,6 +17,7 @@ function LoginContent() {
 
   useEffect(() => {
     const msg = searchParams.get('message');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (msg) setMessage(msg);
   }, [searchParams]);
 
