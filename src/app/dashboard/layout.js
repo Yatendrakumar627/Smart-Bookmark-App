@@ -9,15 +9,18 @@ import { createClient } from '@/lib/supabase/client';
 
 export default function DashboardLayout({ children }) {
   const [user, setUser] = useState(null);
-  const supabase = useMemo(() => createClient(), []);
+  const [supabase, setSupabase] = useState(null);
 
   useEffect(() => {
+    const client = createClient();
+    setSupabase(client);
+    
     const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user } } = await client.auth.getUser();
       setUser(user);
     };
     fetchUser();
-  }, [supabase]);
+  }, []);
 
   const getInitials = (email) => {
     if (!email) return '??';

@@ -6,13 +6,13 @@ import { createClient } from '@/lib/supabase/client';
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
-  const supabase = createClient();
 
   useEffect(() => {
+    const supabase = createClient();
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
     });
-  }, [supabase]);
+  }, []);
 
   return (
     <div className="space-y-8 max-w-2xl mx-auto">
