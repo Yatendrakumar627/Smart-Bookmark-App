@@ -31,7 +31,7 @@ export default function Home() {
       {/* Background Gradients */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/20 rounded-full blur-[120px] animate-pulse delay-1000" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/10 rounded-full blur-[120px] animate-pulse delay-1000" />
       </div>
 
       <div className="relative z-10">
@@ -48,9 +48,9 @@ export default function Home() {
             SmartBookmark
           </motion.div>
           <motion.nav 
-             initial={{ opacity: 0, x: 20 }}
-             animate={{ opacity: 1, x: 0 }}
-             className="flex items-center gap-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-4"
           >
             <Link href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Log in
@@ -95,7 +95,7 @@ export default function Home() {
               variants={itemVariants}
               className="mt-20 relative mx-auto w-full max-w-5xl aspect-video rounded-2xl glass-card overflow-hidden border border-white/10 shadow-2xl"
             >
-               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-purple-500/5" />
+               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/20" />
                <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-light text-lg">
                  Dashboard Preview
                </div>

@@ -15,12 +15,12 @@ export function Sidebar({ className }) {
   ];
 
   return (
-    <aside className={clsx("w-64 border-r border-border bg-card/50 backdrop-blur-xl h-screen sticky top-0 flex flex-col p-4", className)}>
+    <aside className={clsx("w-64 border-r border-border bg-card/50 h-screen sticky top-0 flex flex-col p-4 glass", className)}>
       <div className="flex items-center gap-2 px-2 py-4 mb-8">
-        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold">
+        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-lg shadow-primary/40">
           SB
         </div>
-        <span className="text-xl font-bold tracking-tight">SmartBookmark</span>
+        <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">SmartBookmark</span>
       </div>
 
       <nav className="flex-1 space-y-1">
@@ -32,13 +32,13 @@ export function Sidebar({ className }) {
                 key={link.href}
                 href={link.href}
                 className={clsx(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 group",
                   isActive 
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20" 
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                    ? "bg-primary text-primary-foreground shadow-[0_0_15px_-3px_rgba(56,189,248,0.4)]" 
+                    : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                 )}
               >
-                <Icon size={18} />
+                <Icon size={18} className={clsx("transition-transform duration-300", isActive && "scale-110")} />
                 {link.label}
               </Link>
             );

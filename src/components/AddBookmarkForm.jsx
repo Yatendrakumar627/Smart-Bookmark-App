@@ -27,6 +27,12 @@ export function AddBookmarkForm({ onBookmarkAdded }) {
     
     const { data: { user } } = await supabase.auth.getUser();
 
+    if (!user) {
+      console.error('No authenticated user found');
+      setLoading(false);
+      return;
+    }
+
     const { error } = await supabase
       .from('bookmarks')
       .insert([

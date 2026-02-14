@@ -7,9 +7,21 @@ import { ExternalLink, Hash, Clock, Trash2, Globe } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { AddBookmarkForm } from '@/components/AddBookmarkForm';
 
+import { useDashboard } from '@/context/DashboardContext';
+import { useMemo } from 'react';
+
 export default function BookmarksPage() {
+  const { searchQuery } = useDashboard();
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const filteredBookmarks = useMemo(() => {
+    if (!searchQuery) return bookmarks;
+    return bookmarks.filter(b => 
+      b.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      b.url?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [bookmarks, searchQuery]);
 
   const fetchBookmarks = useCallback(async () => {
     const supabase = createClient();
@@ -109,7 +121,7 @@ export default function BookmarksPage() {
               className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           >
               <AnimatePresence mode="popLayout">
-                {bookmarks.map((bookmark) => (
+                {filteredBookmarks.map((bookmark) => (
                     <motion.div 
                       key={bookmark.id} 
                       variants={item}

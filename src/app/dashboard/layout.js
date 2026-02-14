@@ -7,7 +7,10 @@ import { AddBookmarkForm } from '@/components/AddBookmarkForm';
 import { useEffect, useState, useMemo } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
-export default function DashboardLayout({ children }) {
+import { DashboardProvider, useDashboard } from '@/context/DashboardContext';
+
+function DashboardContent({ children }) {
+  const { searchQuery, setSearchQuery } = useDashboard();
   const [user, setUser] = useState(null);
   const [supabase, setSupabase] = useState(null);
 
@@ -32,20 +35,22 @@ export default function DashboardLayout({ children }) {
       <Sidebar />
       <div className="flex-1 flex flex-col">
         {/* Top Header */}
-        <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-background/80 px-6 backdrop-blur-md">
+        <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-background/50 px-6 glass">
            <div className="flex-1">
              <div className="relative max-w-md">
                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                <Input 
                  type="search" 
                  placeholder="Search bookmarks..." 
+                 value={searchQuery}
+                 onChange={(e) => setSearchQuery(e.target.value)}
                  className="pl-9 bg-secondary/50 border-transparent focus:bg-background focus:border-input transition-all"
                />
              </div>
            </div>
            
-           <div className="flex items-center gap-4">
-             <Button variant="ghost" size="icon" className="rounded-full">
+          <div className="flex items-center gap-4">
+             <Button variant="ghost" size="icon" className="rounded-full hover:bg-primary/10 hover:text-primary transition-colors">
                <Bell size={20} />
              </Button>
              
@@ -53,12 +58,12 @@ export default function DashboardLayout({ children }) {
 
              <div className="flex items-center gap-3 pl-2 border-l border-border">
                 <div className="hidden md:block text-right">
-                    <p className="text-xs font-medium truncate max-w-[150px]">
+                    <p className="text-xs font-semibold truncate max-w-[150px]">
                         {user?.email || 'Loading...'}
                     </p>
-                    <p className="text-[10px] text-muted-foreground">Pro Account</p>
+                    <p className="text-[10px] text-accent uppercase tracking-widest font-bold">Pro Account</p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-purple-500 flex items-center justify-center text-white text-xs font-bold ring-2 ring-background shadow-lg">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-primary-foreground text-xs font-bold ring-2 ring-primary/20 shadow-[0_0_10px_rgba(56,189,248,0.3)]">
                   {getInitials(user?.email)}
                 </div>
              </div>
@@ -71,5 +76,13 @@ export default function DashboardLayout({ children }) {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function DashboardLayout({ children }) {
+  return (
+    <DashboardProvider>
+      <DashboardContent>{children}</DashboardContent>
+    </DashboardProvider>
   );
 }

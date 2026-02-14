@@ -8,45 +8,44 @@
   --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
-  --primary: #6366f1; /* Indigo 500 */
+  --primary: #261cc1; /* User Blue */
   --primary-foreground: #ffffff;
   --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
+  --secondary-foreground: #261cc1;
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
+  --accent: #e8ff52; /* Cyber Yellow */
+  --accent-foreground: #0a0b3b;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #6366f1;
+  --ring: #261cc1;
   --radius: 0.75rem;
+  --glass-blur: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark Theme (Premium) */
-    --background: #030712; /* Gray 950+ */
-    --foreground: #f8fafc;
-    --card: #0f172a;
-    --card-foreground: #f8fafc;
-    --popover: #0f172a;
-    --popover-foreground: #f8fafc;
-    --primary: #818cf8; /* Indigo 400 */
-    --primary-foreground: #0f172a;
-    --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
-    --accent: #1e293b;
-    --accent-foreground: #f8fafc;
-    --destructive: #7f1d1d;
-    --destructive-foreground: #f8fafc;
-    --border: #1e293b;
-    --input: #1e293b;
-    --ring: #818cf8;
-  }
+:root.dark {
+  /* Cyber Tech Dark Theme */
+  --background: #0a0b3b; /* Deep Navy */
+  --foreground: #f8fafc;
+  --card: #11124d;
+  --card-foreground: #f8fafc;
+  --popover: #11124d;
+  --popover-foreground: #f8fafc;
+  --primary: #38bdf8; /* Sky Blue for better dark mode visibility */
+  --primary-foreground: #0a0b3b;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #e8ff52; /* Cyber Yellow */
+  --accent-foreground: #0a0b3b;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f8fafc;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #38bdf8;
 }
 
 @theme inline {
@@ -87,13 +86,28 @@ body {
 /* Glassmorphism Utilities */
 .glass {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-card {
   background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes scan {
+  from { top: 0; }
+  to { top: 100%; }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
 }
