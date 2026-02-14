@@ -24,7 +24,7 @@ A premium, production-ready bookmark manager built with Next.js and Supabase for
 2. Go to **Project Settings > API** and copy your `URL` and `Anon Key`.
 3. Create a `.env.local` file in the root directory and add:
    ```env
-   NEXT_PUBLIC_SUPABASE_URL=your-project-url
+   NEXT_PUBLIC_SUPABASE_URL=https://ccuriugwylojjfaknxxu.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
    ```
 4. Run the following SQL in the **SQL Editor** to set up the database:
